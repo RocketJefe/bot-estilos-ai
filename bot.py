@@ -9,7 +9,7 @@ from telegram import Update
 from telegram.ext import ApplicationBuilder, CommandHandler, MessageHandler, filters, ContextTypes
 from google import genai
 
-# --- Servidor HTTP para evitar que Render congele el contenedor ---
+# --- Microservidor HTTP para Render y Cron-job ---
 class HealthHandler(BaseHTTPRequestHandler):
     def do_GET(self):
         self.send_response(200)
@@ -24,7 +24,7 @@ def iniciar_servidor():
 
 threading.Thread(target=iniciar_servidor, daemon=True).start()
 
-# --- Conexiones y Variables ---
+# --- Configuración y Conexiones ---
 TELEGRAM_TOKEN = os.getenv("TELEGRAM_TOKEN")
 GEMINI_KEY = os.getenv("GEMINI_KEY")
 
@@ -77,8 +77,8 @@ def generar_con_estilo(sujeto, estilo):
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     msg = (
         "🎨 *Bot de Estilos Fotorrealistas*\n\n"
-        "1. Usa /guardar_estilo y envía la imagen de referencia (ej. lujo, iluminación, foto).\n"
-        "2. Usa /procesar y envía la imagen base que deseas recrear."
+        "1. Usa /guardar_estilo y envía la imagen de referencia.\n"
+        "2. Usa /procesar y envía la imagen base que deseas transformar."
     )
     await update.message.reply_text(msg, parse_mode="Markdown")
 
