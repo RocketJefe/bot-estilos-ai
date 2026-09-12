@@ -26,12 +26,14 @@ def describir_sujeto_base(imagen_bytes):
     return respuesta.text.strip()
 
 def generar_con_estilo(sujeto, estilo):
-    # Forzamos fondo negro puro y contraste de oro brillante para eliminar el tono sepia apagado
+    # Prohibimos marcos circulares/medallones y forzamos composición panorámica horizontal
     prompt_final = (
-        f"{sujeto}, rendered in {estilo}, solid pitch black background, vibrant luminescent pure gold (#FFD700), "
+        f"wide landscape panoramic composition, {sujeto}, {estilo}, solid pitch black background, "
+        f"vibrant luminescent pure gold (#FFD700), open wide angle scene, no borders, no circular frames, "
         f"extreme contrast, intricate technical linework, 8k octane render, masterpiece"
     )
     prompt_encoded = urllib.parse.quote(prompt_final)
+    # Cambiamos resolución a panorámica 16:9 real (1280x720)
     url = f"https://image.pollinations.ai/prompt/{prompt_encoded}?width=1280&height=720&nologo=true&model=flux"
     headers = {"User-Agent": "Mozilla/5.0"}
     
