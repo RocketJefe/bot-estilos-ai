@@ -23,7 +23,7 @@ def extraer_adn_de_estilo(imagen_bytes):
         "rendering technique, and mood, without focusing on the specific subject. Return only the prompt in English."
     )
     respuesta = client_gemini.models.generate_content(
-        model="gemini-2.5-flash",
+        model="gemini-3.6-flash",
         contents=[img, instruccion]
     )
     return respuesta.text.strip()
@@ -32,7 +32,7 @@ def describir_sujeto_base(imagen_bytes):
     img = Image.open(io.BytesIO(imagen_bytes))
     instruccion = "Describe the main subject, central pose, and key objects in this image in one brief English phrase."
     respuesta = client_gemini.models.generate_content(
-        model="gemini-2.5-flash",
+        model="gemini-3.6-flash",
         contents=[img, instruccion]
     )
     return respuesta.text.strip()
