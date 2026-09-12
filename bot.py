@@ -42,7 +42,7 @@ def extraer_adn_de_estilo(imagen_bytes):
         "Focus on: raw authentic photography, natural skin texture, cinematic rim lighting, realistic depth of field. Return only the prompt in English."
     )
     respuesta = client_gemini.models.generate_content(
-        model="gemini-2.5-flash",
+        model="gemini-3.6-flash",
         contents=[img, instruccion]
     )
     return respuesta.text.strip()
@@ -54,7 +54,7 @@ def describir_sujeto_base(imagen_bytes):
         "Ensure the person is specified as a real human with natural features, avoiding cartoon or stylized words."
     )
     respuesta = client_gemini.models.generate_content(
-        model="gemini-2.5-flash",
+        model="gemini-3.6-flash",
         contents=[img, instruccion]
     )
     return respuesta.text.strip()
